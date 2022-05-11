@@ -12,11 +12,11 @@
   "b2_key_id": "B2 Key ID",
   "b2_key": "B2 Key",
   "b2_bucket": "B2 Bucket",
-  "command_line_interface": ["Click", "No command-line interface"],
   "open_source_license": ["MIT", "BSD-3-Clause", "ISC", "Apache-2.0", "GPL-3.0-only", "Not open source"],
   "docstrings_style": ["google", "numpy", "pep257"],
   "use_mypy": "y",
   "line_length": "80",
   "install_precommit_hooks": "y",
-  "_copy_without_render": ["docs/changelog.md", "docs/contributing.md", "docs/index.md", ".github/workflows/*.yml"]
+  "_copy_without_render": ["docs/changelog.md", "docs/contributing.md", "docs/index.md", ".github/workflows/*.yml"],
+  "_collect_coverage": ["n", "y"]
 }
