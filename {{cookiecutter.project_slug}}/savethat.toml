@@ -1,0 +1,17 @@
+# Default config file for savethat
+
+# save local data at this path
+local_path="${PROJECT_ROOT}/data"
+# prefix for this project
+b2_prefix="{{ cookiecutter.project_name }}"
+
+
+{%- if cookiecutter.use_b2_simulation == 'y' %}
+use_b2_simulation=true
+{%- else %}
+# the B2 Key
+b2_key_id="{{ cookiecutter.b2_key_id }}"
+b2_key="{{ cookiecutter.b2_key }}"
+# name of the B2 bucket
+b2_bucket="{{ cookiecutter.b2_bucket }}"
+{%- endif %}

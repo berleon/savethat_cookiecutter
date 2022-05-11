@@ -1,20 +1,13 @@
 {%- set license_classifiers = {
-    'MIT': 'License :: OSI Approved :: MIT License',
-    'BSD-3-Clause': 'License :: OSI Approved :: BSD License',
-    'ISC': 'License :: OSI Approved :: ISC License (ISCL)',
-    'Apache-2.0': 'License :: OSI Approved :: Apache Software License',
-    'GPL-3.0-only': 'License :: OSI Approved :: GNU General Public License v3 (GPLv3)'
+'MIT': 'License :: OSI Approved :: MIT License',
+'BSD-3-Clause': 'License :: OSI Approved :: BSD License',
+'ISC': 'License :: OSI Approved :: ISC License (ISCL)',
+'Apache-2.0': 'License :: OSI Approved :: Apache Software License',
+'GPL-3.0-only': 'License :: OSI Approved :: GNU General Public License v3 (GPLv3)'
 } -%}
 [tool]
 [tool.poetry]
-name = "{{ cookiecutter.project_slug }}"
-version = "{{ cookiecutter.version }}"
-homepage = "https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}"
-description = "{{ cookiecutter.project_short_description }}."
-authors = ["{{ cookiecutter.full_name.replace('\"', '\\\"') }} <{{ cookiecutter.email }}>"]
-readme = "README.md"
 {%- if cookiecutter.open_source_license in license_classifiers %}
-license =  "{{ cookiecutter.open_source_license }}"
 {%- endif %}
 classifiers=[
     'Development Status :: 2 - Pre-Alpha',
@@ -22,46 +15,52 @@ classifiers=[
 {%- if cookiecutter.open_source_license in license_classifiers %}
     '{{ license_classifiers[cookiecutter.open_source_license] }}',
 {%- endif %}
-    'Natural Language :: English',
-    'Programming Language :: Python :: 3',
-    'Programming Language :: Python :: 3.6',
-    'Programming Language :: Python :: 3.7',
-    'Programming Language :: Python :: 3.8',
     'Programming Language :: Python :: 3.9',
+    'Programming Language :: Python :: 3.10',
 ]
+authors = ["{{ cookiecutter.full_name.replace('\"', '\\\"') }} <{{ cookiecutter.email }}>"]
+description = "{{ cookiecutter.project_short_description }}."
+homepage = "https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}"
+license = "{{ cookiecutter.open_source_license }}"
+name = "{{ cookiecutter.project_slug }}"
 packages = [
-    { include = "{{ cookiecutter.pkg_name }}" },
-    { include = "tests", format = "sdist" },
+  {include = "{{ cookiecutter.pkg_name }}"},
+  {include = "tests", format = "sdist"},
 ]
+readme = "README.md"
+version = "{{ cookiecutter.version }}"
 
 [tool.poetry.dependencies]
-python = ">=3.6.2,<4.0"
-{%- if cookiecutter.command_line_interface|lower == 'click' %}
-click = "8.0.1"
-{%- endif %}
+python = ">=3.9,<4.0"
 
-black  = { version = "^21.5b2", optional = true}
-isort  = { version = "^5.8.0", optional = true}
-flake8  = { version = "^3.9.2", optional = true}
-flake8-docstrings = { version = "^1.6.0", optional = true }
 {%- if cookiecutter.use_mypy == 'y' %}
-mypy = {version = "^0.900", optional = true}
 {%- endif %}
-pytest  = { version = "^6.2.4", optional = true}
-pytest-cov  = { version = "^2.12.0", optional = true}
-tox  = { version = "^3.20.1", optional = true}
-virtualenv  = { version = "^20.2.2", optional = true}
-pip  = { version = "^20.3.1", optional = true}
-mkdocs  = { version = "^1.1.2", optional = true}
-mkdocs-include-markdown-plugin  = { version = "^1.0.0", optional = true}
-mkdocs-material  = { version = "^6.1.7", optional = true}
-mkdocstrings  = { version = "^0.15.2", optional = true}
-mkdocs-material-extensions  = { version = "^1.0.1", optional = true}
-twine  = { version = "^3.3.0", optional = true}
-mkdocs-autorefs = {version = "^0.2.1", optional = true}
-pre-commit = {version = "^2.12.0", optional = true}
-toml = {version = "^0.10.2", optional = true}
+black = {version = "^21.5b2", optional = true}
 bump2version = {version = "^1.0.1", optional = true}
+flake8 = {version = "^3.9.2", optional = true}
+flake8-docstrings = {version = "^1.6.0", optional = true}
+isort = {version = "^5.8.0", optional = true}
+mkdocs = {version = "^1.1.2", optional = true}
+mkdocs-autorefs = {version = "^0.2.1", optional = true}
+mkdocs-include-markdown-plugin = {version = "^1.0.0", optional = true}
+mkdocs-material = {version = "^6.1.7", optional = true}
+mkdocs-material-extensions = {version = "^1.0.1", optional = true}
+mkdocstrings = {version = "^0.15.2", optional = true}
+mypy = {version = "^0.900", optional = true}
+pip = {version = "^20.3.1", optional = true}
+pre-commit = {version = "^2.12.0", optional = true}
+pytest = {version = "^6.2.4", optional = true}
+pytest-cov = {version = "^2.12.0", optional = true}
+toml = {version = "^0.10.2", optional = true}
+tox = {version = "^3.20.1", optional = true}
+twine = {version = "^3.3.0", optional = true}
+virtualenv = {version = "^20.2.2", optional = true}
+
+matplotlib = {version = "^3.2.1", optional = true}
+numpy = {version = "^1.18.1", optional = true}
+pandas = {version = "^1.0.1", optional = true}
+savethat = {git = "https://github.com/berleon/savethat", branch = "main"}
+scikit-learn = {version = "^0.22.1", optional = true}
 
 [tool.poetry.extras]
 test = [
@@ -76,27 +75,27 @@ test = [
     "pytest-cov"
     ]
 
-dev = ["tox", "pre-commit", "virtualenv", "pip", "twine", "toml", "bump2version"]
+dev = [
+  "tox",
+  "pre-commit",
+  "virtualenv",
+  "pip",
+  "twine",
+  "toml",
+  "bump2version",
+  "python-language-server[all]",
+]
 
 doc = [
-    "mkdocs",
-    "mkdocs-include-markdown-plugin",
-    "mkdocs-material",
-    "mkdocstrings",
-    "mkdocs-material-extension",
-    "mkdocs-autorefs"
-    ]
+  "mkdocs",
+  "mkdocs-include-markdown-plugin",
+  "mkdocs-material",
+  "mkdocstrings",
+  "mkdocs-material-extension",
+  "mkdocs-autorefs",
+]
 
-{% if cookiecutter.command_line_interface|lower == 'click' -%}
-[tool.poetry.scripts]
-{{ cookiecutter.project_slug }} = '{{ cookiecutter.pkg_name }}.cli:main'
-
-{% endif -%}
 [tool.black]
-line-length = 120
-skip-string-normalization = true
-target-version = ['py36', 'py37', 'py38']
-include = '\.pyi?$'
 exclude = '''
 /(
     \.eggs
@@ -111,18 +110,22 @@ exclude = '''
   | dist
 )/
 '''
+include = '\.pyi?$'
+line-length = {{ cookiecutter.line_length }}
+skip-string-normalization = true
+target-version = ['py39']
 
 [tool.isort]
-multi_line_output = 3
-include_trailing_comma = true
-force_grid_wrap = 0
-use_parentheses = true
+line_length = {{ cookiecutter.line_length }}
 ensure_newline_before_comments = true
-line_length = 120
+force_grid_wrap = 0
+include_trailing_comma = true
+multi_line_output = 3
 skip_gitignore = true
+use_parentheses = true
 # you can skip files as below
 #skip_glob = docs/conf.py
 
 [build-system]
-requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+requires = ["poetry-core>=1.0.0"]

@@ -1,5 +1,6 @@
 import datetime
 import os
+from pathlib import Path
 import shlex
 import subprocess
 import sys
@@ -192,6 +193,35 @@ def test_docstrings_style(cookies):
         assert "docstring-convention = google" in ''.join(lines)
 
 
+def test_run_savethat(cookies):
+    with bake_in_temp_dir(cookies,
+        extra_context={'project_name': 'fit_ols'}
+    ) as result:
+        assert result.project.isdir()
+        assert result.project is not None
+        project_path = str(result.project)
+
+        # install savethat
+
+        this_dir = Path(__file__).parent
+
+        proc = subprocess.Popen(
+            this_dir / "test_savethat_fit_ols.sh",
+            cwd=project_path,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+        )
+        while proc.poll() is None:
+            print(proc.stdout.readline().decode("utf-8"), end='')
+
+        assert proc.returncode == 0
+
+        # poetry_out = check_output_inside_dir('python -m poetry install', project_path)
+        # poetry_out = check_output_inside_dir('python -m poetry install', project_path)
+
+        # fit_ols_out = check_output_inside_dir('python -m fit_ols list', project_path)
+        # assert "FitOLS" in fit_ols_out
+
 # def test_project_with_hyphen_in_module_name(cookies):
 #     result = cookies.bake(
 #         extra_context={'project_name': 'something-with-a-dash'}
@@ -211,33 +241,3 @@ def test_docstrings_style(cookies):
 #     )
 #     assert "secure" in result_travis_config["deploy"]["password"],\
 #         "missing password config in .travis.yml"
-
-
-@pytest.mark.parametrize("args", [
-    ({'command_line_interface': "No command-line interface"}, False),
-    ({'command_line_interface': 'click'}, True),
-])
-def test_bake_with_no_console_script(cookies, args):
-    context, is_present = args
-    result = cookies.bake(extra_context=context)
-    project_path, project_slug, project_dir = project_info(result)
-    found_project_files = os.listdir(project_dir)
-    assert ("cli.py" in found_project_files) == is_present
-
-    pyproject_path = os.path.join(project_path, _DEPENDENCY_FILE)
-    with open(pyproject_path, 'r') as pyproject_file:
-        assert ('[tool.poetry.scripts]' in pyproject_file.read()) == is_present
-
-
-def test_bake_with_console_script_cli(cookies):
-    context = {'command_line_interface': 'click'}
-    result = cookies.bake(extra_context=context)
-    project_path, project_slug, project_dir = project_info(result)
-    module_path = os.path.join(project_dir, 'cli.py')
-
-    out = execute([sys.executable, module_path], project_dir)
-    assert project_slug in out
-
-    out = execute([sys.executable, module_path, "--help"], project_dir)
-
-    assert 'Show this message and exit.' in out
