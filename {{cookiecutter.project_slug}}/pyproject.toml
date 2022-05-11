@@ -19,7 +19,9 @@ classifiers=[
 authors = ["{{ cookiecutter.full_name.replace('\"', '\\\"') }} <{{ cookiecutter.email }}>"]
 description = "{{ cookiecutter.project_short_description }}."
 homepage = "https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}"
+{%- if cookiecutter.open_source_license in license_classifiers %}
 license = "{{ cookiecutter.open_source_license }}"
+{%- endif %}
 name = "{{ cookiecutter.project_slug }}"
 packages = [
   {include = "{{ cookiecutter.pkg_name }}"},

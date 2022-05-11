@@ -22,5 +22,5 @@ python -m fit_ols nodes
 
 # execute the FitOLS node
 python -m fit_ols run fit_ols.fit_ols.FitOLS \
-    --dataset california \
+    --dataset california_housing \
      --target MedHouseVal
