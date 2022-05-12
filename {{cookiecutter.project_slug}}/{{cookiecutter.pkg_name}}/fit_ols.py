@@ -1,4 +1,4 @@
-"""Example how to use `savethat` to save the results of an ols fit."""
+"""Example how to use `savethat` for a simple ols fit."""
 
 import dataclasses
 import pickle
