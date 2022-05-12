@@ -9,7 +9,7 @@ format:
 
 lint:
 	flake8 $(sources) tests
-	{%- if cookiecutter.use_mypy == 'y' %}
+	{%- if cookiecutter.use_mypy.startswith('Yes') %}
 	mypy $(sources) tests
 	{%- endif %}
 

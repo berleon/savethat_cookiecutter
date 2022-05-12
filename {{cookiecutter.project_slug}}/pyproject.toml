@@ -95,3 +95,41 @@ use_parentheses = true
 [build-system]
 build-backend = "poetry.core.masonry.api"
 requires = ["poetry-core>=1.0.0"]
+
+{% if cookiecutter.use_mypy.startswith('Yes') %}
+[tool.mypy]
+python_version = {{ cookiecutter.python }}
+check_untyped_defs = true
+disallow_incomplete_defs = true
+disallow_untyped_calls = false
+disallow_untyped_decorators = true
+no_implicit_optional = true
+show_error_codes = true
+strict_optional = true
+warn_redundant_casts = true
+warn_return_any = false
+warn_unused_configs = true
+warn_unused_ignores = true
+
+
+[[tool.mypy.overrides]]
+module = [
+    "anyconfig",
+    "b2sdk",
+    "b2sdk.*",
+    "b2sdk.v2",
+    "coverage",
+    "cookiecutter",
+    "cookiecutter.*",
+    "cpuinfo",
+    "matplotlib",
+    "pandas",
+    "reproducible",
+    "setuptools",
+    "sklearn",
+    "sklearn.*",
+    "typing_inspect",
+]
+ignore_missing_imports = true
+
+{%- endif %}

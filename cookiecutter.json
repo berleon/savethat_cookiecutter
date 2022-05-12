@@ -3,20 +3,52 @@
   "project_slug": "{{ cookiecutter.project_name.lower().replace(' ', '-') }}",
   "pkg_name": "{{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') }}",
   "project_short_description": "Skeleton project created by Cookiecutter PyPackage",
-  "full_name": "Leon Sixt",
-  "email": "leon.sixt@gmail.com",
-  "github_username": "berleon",
+  "full_name": "Your full name",
+  "email": "Your email",
+  "github_username": "",
   "version": "0.1.0",
-  "python": ["3.7", "3.8", "3.9", "3.10"],
-  "use_b2_simulation": "y",
-  "b2_key_id": "B2 Key ID",
-  "b2_key": "B2 Key",
-  "b2_bucket": "B2 Bucket",
-  "open_source_license": ["MIT", "BSD-3-Clause", "ISC", "Apache-2.0", "GPL-3.0-only", "Not open source"],
-  "docstrings_style": ["google", "numpy", "pep257"],
-  "use_mypy": "y",
+  "python": [
+    "3.9",
+    "3.10"
+  ],
+  "setup_backblaze": [
+    "No - I prefer to not sync my runs to the cloud ",
+    "Yes - I have an Backblaze account and an application key at hand"
+  ],
+  "b2_key_id": "B2 Key ID (skip if you don't want to sync)",
+  "b2_key": "B2 Key (skip if you don't want to sync)",
+  "b2_bucket": "B2 Bucket (skip if you don't want to sync)",
+  "open_source_license": [
+    "MIT",
+    "BSD-3-Clause",
+    "ISC",
+    "Apache-2.0",
+    "GPL-3.0-only",
+    "Not open source"
+  ],
+  "docstrings_style": [
+    "google",
+    "numpy",
+    "pep257"
+  ],
+  "use_mypy": [
+    "Yes - I want to have static type checking",
+    "No - I don't want to have static type checking"
+  ],
   "line_length": "80",
-  "install_precommit_hooks": "y",
-  "_copy_without_render": ["docs/changelog.md", "docs/contributing.md", "docs/index.md", ".github/workflows/*.yml"],
-  "_collect_coverage": ["n", "y"]
+  "install_precommit_hooks": [
+    "Yes - I want to install pre-commit hooks",
+    "No - I don't want to install pre-commit hooks"
+  ],
+
+  "_copy_without_render": [
+    "docs/changelog.md",
+    "docs/contributing.md",
+    "docs/index.md",
+    ".github/workflows/*.yml"
+  ],
+  "_collect_coverage": [
+    "n",
+    "y"
+  ]
 }
