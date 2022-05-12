@@ -15,7 +15,7 @@ def test_fit_ols(env_file: Path) -> None:
     )
     node = savethat.create_node(
         fit_ols.FitOLS,
-        args,
         env_file,
+        args,
     )
     node.run()
