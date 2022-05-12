@@ -10,12 +10,29 @@ tutorial.
 If you are new to Git and GitHub, you should probably spend a few minutes on
 some tutorials at the top of the page at [GitHub Help].
 
-## Step 1: Install Cookiecutter
+## Step 1: Create directory structure
 
-Install cookiecutter:
+We will create a directory structure like this:
+```
+my_project
+├── my_project      # the source code
+├── data_storage    # the run's data will be stored here
+└── venv            # the virtual environment
+```
 
-``` bash
-pip install cookiecutter
+Let's first create the top-level directory.
+```bash
+mkdir my_project
+```
+Next, we create the virtual environment inside of the `my_project` folder.
+```bash
+cd my_project
+python3 -m venv venv
+```
+Let's update pip and install cookiecutter.
+```
+source venv/bin/activate
+pip install -U pip wheel cookiecutter
 ```
 
 ## Step 2: Generate Your Package
@@ -34,43 +51,45 @@ provided to `project_slug`.
 Go to this generated folder, the project layout should look like:
 
 ```
-.
-├── .bumpversion.cfg
-├── .editorconfig
+my_project
+├── docs
+│   ├── api.md
+│   ├── changelog.md
+│   ├── contributing.md
+│   ├── index.md
+│   ├── installation.md
+│   └── usage.md
+├── my_package
+│   ├── fit_ols.py
+│   ├── __init__.py
+│   └── __main__.py
 ├── .github
-│   ├── ISSUE_TEMPLATE.md
-│   └── workflows
-│       ├── dev.yml
-│       ├── preview.yml
-│       └── release.yml
+│   ├── ISSUE_TEMPLATE.md
+│   └── workflows
+│       ├── dev.yml
+│       ├── preview.yml
+│       └── release.yml
+├──── tests
+│   ├── conftest.py
+│   ├── __init__.py
+│   └── test_fit_ols.py
+├── .editorconfig
+├── .bumpversion.cfg
 ├── .gitignore
 ├── .pre-commit-config.yaml
 ├── CHANGELOG.md
 ├── CONTRIBUTING.md
 ├── LICENSE
-├── README.md
-├── docs
-│   ├── api.md
-│   ├── changelog.md
-│   ├── contributing.md
-│   ├── index.md
-│   ├── installation.md
-│   └── usage.md
 ├── makefile
 ├── mkdocs.yml
-├── my_package
-│   ├── __init__.py
-│   ├── cli.py
-│   └── my_package.py
 ├── pyproject.toml
-├── setup.cfg
-└── tests
-    ├── __init__.py
-    └── test_my_package.py
-
+├── README.md
+├── savethat.toml
+├──
+└── setup.cfg
 ```
 
-Here the project_slug is `my-package`, when you generate yours, it could be other name.
+Here the project_slug is `my_package`, when you generate yours, it could have another name.
 
 Also be noticed that there's `pyproject.toml` in this folder. This is the main configuration file of our project.
 
@@ -82,11 +101,7 @@ In this step we will install Poetry if you are not using it, since the whole pro
 pip install poetry
 ```
 
-In addition, Poetry provides a [custom installer](https://python-poetry.org/docs/#installation) that will install
-poetry isolated from the rest of your system by vendorizing its dependencies.
-This is the recommended way of installing poetry.
-
-## Step 4: Install Dev Requirements
+## Step 4: Install Requirements
 
 You should still be in the folder named as `project_slug`, which containing the
  `pyproject.toml` file.
@@ -94,26 +109,17 @@ You should still be in the folder named as `project_slug`, which containing the
 Install the new project's local development requirements with `poetry install`:
 
 ``` bash
-poetry install -E doc -E dev -E test
+poetry install
 poetry run tox
 ```
 
 Poetry will create its own virtualenv isolated from your system and install the dependencies in it.
-We installed extra dependency need by developer with `-E {group}` options, such as documentation build tools, lint,
-formatting and test tools etc.
 
-We also launch a smoke test here by running `poetry run tox`. This will run `tox` within created virtual environment,
-give you a test report and lint report. You should see no errors except some lint warnings.
+We also launch a smoke test here by running `poetry run tox`. This will run
+`tox` within created virtual environment, give you a test report and lint
+report. You should see no errors except some lint warnings.
 
 You can also activate the virtual environment manually with `poetry shell`, this will create a new shell.
-
-??? Tips
-
-    Extra dependencies are grouped into three groups, doc, dev and test for better
-    granularity. When you ship the package, dependencies in group doc, dev and test
-    might not be shipped.
-
-    As the developer, you will need install all the dependencies.
 
 ??? Tips
 
@@ -126,10 +132,21 @@ You can also activate the virtual environment manually with `poetry shell`, this
     machine. Otherwise, remove it from tox.ini and pyproject.toml (search python3.x then
     remove it).
 
+
+## Step 5: Run a first Node
+
+The generated project includes an exemplary node. You can run it with:
+
+```bash
+python -m my_package run FitOLS --dataset california_housing --target MedHouseVal
+```
+
+See the generated `README.md` for more information about the CLI.
+
 ## Step 5: Create a GitHub Repo
 
-Go to your GitHub account and create a new repo named `my-package`, where
-`my-package` matches the `project_slug` from your answers to running
+Go to your GitHub account and create a new repo named `my_package`, where
+`my_package` matches the `project_slug` from your answers to running
 cookiecutter.
 
 Then go to repo > settings > secrets, click on 'New repository secret', add the following
@@ -165,16 +182,16 @@ Move into this folder, and then setup git to use your GitHub repo and upload the
 code:
 
 ``` bash
-cd my-package
+cd my_package
 
 git add .
 git commit -m "Initial commit."
 git branch -M main
-git remote add origin git@github.com:myusername/my-package.git
+git remote add origin git@github.com:myusername/my_package.git
 git push -u origin main
 ```
 
-Where `myusername` and `my-package` are adjusted for your username and
+Where `myusername` and `my_package` are adjusted for your username and
 repo name.
 
 You'll need a ssh key to push the repo. You can [Generate] a key or

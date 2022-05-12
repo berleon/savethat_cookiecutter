@@ -1,17 +1,18 @@
-# Cookiecutter PyPackage
+# Cookiecutter PyPackage for savethat
 
 Cookiecutter template for a Python package, built with popular develop tools and
 conform to best practice.
 
-[![CI Status](https://github.com/waynerv/cookiecutter-pypackage/actions/workflows/dev.yml/badge.svg)](https://github.com/waynerv/cookiecutter-pypackage/actions/workflows/dev.yml)
+[![CI Status](https://github.com/berleon/savethat_cookiecutter/actions/workflows/dev.yml/badge.svg)](https://github.com/berleon/savethat_cookiecutter/actions/workflows/dev.yml)
 [![License](https://img.shields.io/pypi/l/ppw)](https://opensource.org/licenses/BSD-2-Clause)
 
-* Documentation: <https://waynerv.github.io/cookiecutter-pypackage>
+* Documentation: <https://berleon.github.io/savethat_cookiecutter>
 
 ## Features
 
 This tool will create Python project with the following features:
 
+* [savethat](https://github.com/berleon/savethat): A Python package for keeping track of ML experiments.
 * [Poetry](https://python-poetry.org/): Manage dependency, build and release
 * [Mkdocs](https://www.mkdocs.org): Writing your docs in markdown style
 * Testing with [Pytest](https://pytest.org) (unittest is still supported out of the box)
@@ -41,7 +42,7 @@ pip install -U cookiecutter
 Generate a Python package project:
 
 ```
-cookiecutter https://github.com/waynerv/cookiecutter-pypackage.git
+cookiecutter https://github.com/berleon/savethat_cookiecutter/
 ```
 
 Then follow **[Tutorial](docs/tutorial.md)** to finish other configurations.

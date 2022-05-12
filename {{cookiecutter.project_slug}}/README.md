@@ -25,31 +25,25 @@
 
 ### Get it running
 
-The preferred setup is that you have a directory named `{{ cookiecutter.project_slug }}` and inside that directory you have a `data` folder, the virtual environment and this repository.
-Just follow these steps:
 
+To install this project, run:
 
 ```bash
-mkdir {{ cookiecutter.project_slug }}
+mkdir {{ cookiecutter.project_slug }}                   # this directory will hold the code, data and venv
 cd {{ cookiecutter.project_slug }}
-# create and load the virtual environment
-python3 -m venv venv
+python3 -m venv venv                                    # create and load the virtual environment
 source venv/bin/activate
 # create the data folder
 mkdir data
-# clone the repository
 git clone https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}.git
 cd {{ cookiecutter.project_slug }}
-# Get poetry and update pip
 pip install -U pip wheel poetry
 poetry install
-# now you can list the available nodes
-python -m {{ cookiecutter.project_slug }} nodes
-# or run the tests
-make test
+python -m {{ cookiecutter.project_slug }} nodes         # now you can list the available nodes
+make test                                               # or run the tests
 ```
 
-## Comand line interface
+## Command line interface
 
 Make sure you have successfully run `poetry install` in the project directory.
 You then can list and run the project nodes and also list previously runs.
@@ -89,13 +83,14 @@ python -m {{ cookiecutter.pkg_name }} ls FitOLS --completed --last 3h
 
 ### Delete runs
 
-The cli to delete runs is similar to the one to list runs:
+All failed runs from the last 3 hours can be deleted with:
 
 ```
 python -m {{ cookiecutter.pkg_name }} rm FitOLS --failed --last 3h
 ```
-Would ask for confirmation before deleting all completed runs in the last 3 hours.
+The CLI would ask for confirmation before deleting all completed runs in the last 3 hours.
 You can use the `--force` flag to skip the confirmation.
+See `python -m {{ cookiecutter.pkg_name }} rm  --help ` for more information.
 
 ## Features
 
