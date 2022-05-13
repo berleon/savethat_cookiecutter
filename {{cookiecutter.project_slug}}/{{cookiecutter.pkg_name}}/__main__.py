@@ -8,7 +8,4 @@ if __name__ == "__main__":
     coverage.process_startup()
     {% endif %}repro_dir = Path(__file__).parent.parent
 
-    savethat.run_main(
-        "{{cookiecutter.pkg_name}}",
-        env_file=repro_dir / "savethat.toml",
-    )
+    savethat.run_main("{{cookiecutter.pkg_name}}")

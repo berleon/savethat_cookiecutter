@@ -85,8 +85,6 @@ my_project
 ├── mkdocs.yml
 ├── pyproject.toml
 ├── README.md
-├── savethat.toml
-├──
 └── setup.cfg
 ```
 
@@ -133,8 +131,20 @@ You can also activate the virtual environment manually with `poetry shell`, this
     machine. Otherwise, remove it from tox.ini and pyproject.toml (search python3.x then
     remove it).
 
+## Step 5: Setup Backblaze
 
-## Step 5: Run a first Node
+If you do not have an account you have to [sign up at Backblaze] first.
+Then you can create a new bucket under `B2 Cloud Storage` -> `Buckets`
+and generate and application key for it under `Account` -> `App Keys`.
+
+When you have them at hand, run:
+```bash
+python -m my_package setup_b2
+```
+You will ask you for your key information and bucket name.
+
+
+## Step 6: Run a first Node
 
 The generated project includes an exemplary node. You can run it with:
 
@@ -144,7 +154,7 @@ python -m my_package run FitOLS --dataset california_housing --target MedHouseVa
 See the generated `README.md` for more information about the CLI.
 The saved output is in the `data_storage` folder.
 
-## Step 5: Create a GitHub Repo
+## Step 7: Create a GitHub Repo
 
 Go to your GitHub account and create a new repo named `my_package`, where
 `my_package` matches the `project_slug` from your answers to running
@@ -157,7 +167,7 @@ Then go to repo > settings > secrets, click on 'New repository secret', add the 
 - PYPI_API_TOKEN, see [How to apply pypi token]
 - PERSONAL_TOKEN, see [How to apply personal token]
 
-## Step 6: Set Up codecov integration
+## Step 8: Set Up codecov integration
 
 ???+ Tips
 
@@ -176,7 +186,7 @@ which is not required for public repos:
 
 - CODECOV_TOKEN, see [Codecov GitHub Action - Usage](https://github.com/marketplace/actions/codecov?version=v1.5.2#usage)
 
-## Step 7: Upload code to GitHub
+## Step 9: Upload code to GitHub
 
 Back to your develop environment, find the folder named after the `project_slug`.
 Move into this folder, and then setup git to use your GitHub repo and upload the
@@ -214,7 +224,7 @@ click on actions link, you should find screen like this:
 There should be some workflows running. After they finished, go to [TestPyPI], check if a
 new artifact is published under the name `project_slug`.
 
-## Step 8. Check documentation
+## Step 10. Check documentation
 
 Documentation will be published and available at *https://{your_github_account}.github.io/{your_repo}* once:
 
@@ -229,11 +239,11 @@ poetry run mkdocs serve
 
 This will run the builtin development server for you to preview.
 
-## Step 9. Make official release
+## Step 11. Make release to PyPI(optional)
 
-  After done with your phased development in a feature branch, make a pull request, following
-  instructions at [release checklist](pypi_release_checklist.md), trigger first official release and check
-  result at [PyPI].
+The Github Actions can be used to make official release to PyPI. You have to uncomment the
+PyPI action in the `.github/workflows/{preview.yml,release.yml}`] files.
+
 
 
 [Edit this file]: https://github.com/waynerv/cookiecutter-pypackage/blob/master/docs/tutorial.md
@@ -248,3 +258,5 @@ This will run the builtin development server for you to preview.
 [How to apply pypi token]: https://pypi.org/manage/account/
 [How to apply personal token]: https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token
 [install codecov app]: https://github.com/apps/codecov
+
+[sign up at Backblaze]: https://www.backblaze.com/b2/sign-up.html?referrer=nopref

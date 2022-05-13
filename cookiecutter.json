@@ -11,13 +11,6 @@
     "3.9",
     "3.10"
   ],
-  "setup_backblaze": [
-    "No - I prefer to not sync my runs to the cloud ",
-    "Yes - I have an Backblaze account and an application key at hand"
-  ],
-  "b2_key_id": "B2 Key ID (skip if you don't want to sync)",
-  "b2_key": "B2 Key (skip if you don't want to sync)",
-  "b2_bucket": "B2 Bucket (skip if you don't want to sync)",
   "open_source_license": [
     "MIT",
     "BSD-3-Clause",
