@@ -20,7 +20,7 @@ jobs:
     # The type of runner that the job will run on
     strategy:
       matrix:
-        python-versions: [{{ cookiecutter.python }}]
+        python-versions: [3.9]
         os: [ubuntu-latest]
     runs-on: ${{ matrix.os }}
 

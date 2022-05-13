@@ -18,7 +18,7 @@ jobs:
 
     strategy:
       matrix:
-        python-versions: [ {{ cookiecutter.python }} ]
+        python-versions: [3.9]
 
     steps:
       - uses: actions/checkout@v2
