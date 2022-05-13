@@ -52,7 +52,7 @@ mkdocs-include-markdown-plugin = "^3.4.0"
 mkdocs-material = "^8.2.14"
 mkdocstrings = "^0.18.1"
 mypy = "^0.950"
-pip = "^22.3"
+pip = "^22.1"
 pre-commit = "^2.19.0"
 pytest = "^7.1.2"
 pytest-cov = "^3.0.0"
@@ -131,5 +131,4 @@ module = [
     "typing_inspect",
 ]
 ignore_missing_imports = true
-
-{%- endif %}
+{% endif %}
