@@ -20,13 +20,14 @@ my_project
 └── venv            # the virtual environment
 ```
 
-Let's first create the top-level directory.
+Let's first create the top-level directory and the data_storage
 ```bash
 mkdir my_project
+cd my_project
+mkdir data_storage
 ```
 Next, we create the virtual environment inside of the `my_project` folder.
 ```bash
-cd my_project
 python3 -m venv venv
 ```
 Let's update pip and install cookiecutter.
@@ -140,8 +141,8 @@ The generated project includes an exemplary node. You can run it with:
 ```bash
 python -m my_package run FitOLS --dataset california_housing --target MedHouseVal
 ```
-
 See the generated `README.md` for more information about the CLI.
+The saved output is in the `data_storage` folder.
 
 ## Step 5: Create a GitHub Repo
 
